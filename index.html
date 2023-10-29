@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Páginas de Películas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(241, 241, 241); /* Establece el fondo en verde */
+        }
+
+        .navbar {
+            background-color: #6900be;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-right: 20px;
+        }
+
+        .navbar ul li:last-child {
+            margin-right: 0;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #ffffff;
+            color: #000;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        .card {
+            width: 200px;
+            height: 300px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        .text {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .text h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Elexio</h1>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="file:///C:/Users/kenne/OneDrive/Escritorio/Nueva%20carpeta/canal.html">TV</a></li>
+            <li><a href="#">Películas</a></li>
+            <li><a href="file:///C:/Users/kenne/OneDrive/Escritorio/Nueva%20carpeta/cuenta.html">Cuenta</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <a href="pelicula1.html" class="card" style="background-image: url('https://via.placeholder.com/200x300')">
+            <div class="text">
+                <h2>Película 1</h2>
+            </div>
+        </a>
+        <a href="pelicula2.html" class="card" style="background-image: url('https://via.placeholder.com/200x300')">
+            <div class="text">
+                <h2>Película 2</h2>
+            </div>
+        </a>
+        <a href="pelicula3.html" class="card" style="background-image: url('https://via.placeholder.com/200x300')">
+            <div class="text">
+                <h2>Película 3</h2>
+            </div>
+        </a>
+    </div>
+</body>
+</html>

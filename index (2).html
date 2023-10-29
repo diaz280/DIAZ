@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Emulador de TV</title>
+    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            overflow: hidden;
+        }
+        .tv-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        .tv-screen {
+            width: 100%;
+            height: 100%;
+        }
+        .channel-info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #fff;
+            font-size: 24px; /* Ajusta el tamaño del nombre del canal aquí */
+            transition: opacity 1s;
+            z-index: 9999;
+        }
+        .number-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 48px; /* Ajusta el tamaño del número del canal aquí */
+            transition: opacity 1s;
+            z-index: 9999;
+        }
+        .vjs-control-bar,
+        .vjs-big-play-button {
+            display: none !important;
+        }
+    </style>
+    <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+</head>
+
+<body>
+    <div class="tv-container">
+        <video
+            id="my_video_1"
+            class="video-js vjs-default-skin tv-screen"
+            controls
+            preload="auto"
+            data-setup='{ "controls": false }'
+        >
+            <source
+                src="https://playout.cdn.cartoonnetwork.com.br/playout_02/playlist-720p.m3u8?checkedby:iptvcat.org"
+                type="application/x-mpegURL"
+            />
+            Tu navegador no soporta la reproducción de videos.
+        </video>
+        <div class="channel-info" id="channelInfo" style="opacity: 0;"></div>
+        <div class="number-info" id="numberInfo" style="opacity: 0;"></div>
+    </div>
+    <script>
+        const channels = [
+            {
+                name: 'Cartoon Network',
+                url: 'https://playout.cdn.cartoonnetwork.com.br/playout_02/playlist-720p.m3u8?checkedby:iptvcat.org'
+            },
+            {
+                name: 'Otro Canal',
+                url: 'https://playout.cdn.cartoonnetwork.com.br/playout_04/playlist-720p.m3u8?checkedby:iptvcat.org'
+            }
+            // Agrega más canales aquí
+        ];
+
+        let currentChannelIndex = 0;
+        const channelCount = channels.length;
+
+        function changeChannel() {
+            const videoPlayer = videojs("my_video_1");
+            const currentChannel = channels[currentChannelIndex];
+            const channelInfo = document.getElementById("channelInfo");
+            const numberInfo = document.getElementById("numberInfo");
+            if (currentChannel) {
+                channelInfo.textContent = currentChannel.name;
+                channelInfo.style.opacity = 1;
+                numberInfo.textContent = currentChannelIndex + 1;
+                numberInfo.style.opacity = 1;
+                setTimeout(() => {
+                    channelInfo.style.opacity = 0;
+                    numberInfo.style.opacity = 0;
+                }, 1000);
+                videoPlayer.src({
+                    type: "application/x-mpegURL",
+                    src: currentChannel.url,
+                });
+                videoPlayer.play();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoPlayer = videojs("my_video_1", { "controls": false });
+            videoPlayer.requestFullscreen();
+            changeChannel();
+            document.addEventListener("keydown", function (event) {
+                if (event.keyCode === 37) {
+                    // Tecla de flecha izquierda
+                    currentChannelIndex = (currentChannelIndex - 1 + channelCount) % channelCount;
+                    changeChannel();
+                } else if (event.keyCode === 39) {
+                    // Tecla de flecha derecha
+                    currentChannelIndex = (currentChannelIndex + 1) % channelCount;
+                    changeChannel();
+                } else if (event.keyCode === 32) {
+                    // Redirigir a otra página cuando se presiona la barra espaciadora
+                    window.location.href = "file:///C:/Users/kenne/OneDrive/Escritorio/Nueva%20carpeta/inicio.html";
+                }
+            });
+
+            let timeoutId;
+            let inputNumber = '';
+            let inputTimeoutId;
+            const inputNumberInfo = document.createElement("div");
+            inputNumberInfo.className = "number-info";
+            inputNumberInfo.style.opacity = 0;
+            inputNumberInfo.style.position = "absolute";
+            inputNumberInfo.style.top = "20px";
+            inputNumberInfo.style.right = "20px";
+            document.body.appendChild(inputNumberInfo);
+
+            document.addEventListener("keypress", function (event) {
+                const enteredNumber = Number(event.key);
+                if (!isNaN(enteredNumber) && enteredNumber > 0 && enteredNumber <= channelCount) {
+                    inputNumber += event.key;
+                    inputNumberInfo.textContent = inputNumber;
+                    inputNumberInfo.style.opacity = 1;
+                    clearTimeout(inputTimeoutId);
+                    inputTimeoutId = setTimeout(() => {
+                        currentChannelIndex = parseInt(inputNumber) - 1;
+                        changeChannel();
+                        inputNumber = '';
+                        inputNumberInfo.textContent = '';
+                        inputNumberInfo.style.opacity = 0;
+                    }, 1000);
+                }
+            });
+
+            // Cargar el siguiente canal al inicio
+            const nextChannelIndex = (currentChannelIndex + 1) % channelCount;
+            const nextVideo = videojs("next_video");
+            const nextChannel = channels[nextChannelIndex];
+            nextVideo.src({
+                type: "application/x-mpegURL",
+                src: nextChannel.url,
+            });
+            nextVideo.load();
+        });
+    </script>
+    <video
+        id="next_video"
+        class="video-js"
+        style="display: none;"
+    ></video>
+</body>
+
+</html>

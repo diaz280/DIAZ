@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil y Acerca de</title>
+    <style>
+        /* Agrega tus estilos CSS aquí */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #6200ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background-color: #4d00cc;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .section a {
+            color: #6200ff;
+            text-decoration: none;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #6200ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4d00cc;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">&#8592; Volver</button>
+    <div class="container">
+        <div class="section">
+            <h2>Configuración de Perfil</h2>
+            <form id="profileForm" onsubmit="return submitForm(event)">
+                <input type="text" id="username" placeholder="Nombre de usuario" required><br>
+                <input type="email" id="email" placeholder="Correo electrónico" value="example@example.com" readonly><br>
+                <input type="password" id="currentPassword" placeholder="Contraseña actual" required><br>
+                <input type="password" id="newPassword" placeholder="Nueva contraseña" required><br>
+                <input type="password" id="confirmPassword" placeholder="Confirmar nueva contraseña" required><br>
+                <button type="submit">Guardar cambios</button>
+            </form>
+        </div>
+        <div class="section">
+            <h2>Acerca de</h2>
+            <p>¡Bienvenido a nuestra página! Somos un equipo dedicado a brindar soluciones creativas y eficientes para tus necesidades digitales.</p>
+            <p>No dudes en contactarnos para obtener más información. Visita nuestra página web para conocer más sobre nuestros servicios: <a href="#">www.tusitio.com</a></p>
+        </div>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            // Simulando el envío del formulario
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            // Aquí iría el código para enviar los datos a través de una solicitud HTTP
+
+            // Mostrar la ventana emergente de confirmación
+            alert('Cambios guardados correctamente');
+
+            // Redirigir a la página anterior
+            window.location.href = 'file:///C:/Users/kenne/OneDrive/Escritorio/Nueva%20carpeta/inicio.html';
+            return false;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Encabezado y metadatos aquí -->
+    <!-- Estilos CSS aquí -->
+</head>
+<body>
+    <button class="back-btn" onclick="redirectToPreviousPage()">&#8592; Volver</button>
+    <div class="container">
+        <!-- Contenido de la página aquí -->
+    </div>
+
+    <script>
+        // Función para redirigir a la página anterior
+        function redirectToPreviousPage() {
+            // Reemplaza 'url-de-tu-pagina' con la URL de tu página deseada
+            window.location.href = 'file:///C:/Users/kenne/OneDrive/Escritorio/Nueva%20carpeta/inicio.html';
+        }
+
+        // Resto del script
+    </script>
+</body>
+</html>
